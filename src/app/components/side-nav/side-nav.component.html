@@ -1,0 +1,19 @@
+<div class="side-nav__inner">
+	<div class="side-nav__title">Sections</div>
+
+	<ng-container *ngFor="let section of sections;">
+		<!-- The Button -->
+
+		<button *ngIf="section.type != 'Divider'" type="button"
+				class="side-nav__button"
+				[class.side-nav__button--active]="sectionVisibility[section.id]"
+				(click)="onButtonClick(section.id)">
+			{{ section.title }}
+		</button>
+		<mat-divider *ngIf="section.type == 'Divider'" />
+	</ng-container>
+	
+	<p class="side-nav__empty" *ngIf="sections.length === 0">
+		No sections available.
+	</p>
+</div>

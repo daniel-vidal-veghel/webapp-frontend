@@ -1,0 +1,25 @@
+<div class="app-shell">
+	<header class="app-shell__header">
+		<span class="app-shell__title">WebApp</span>
+	</header>
+
+	<div class="app-shell__body">
+		<nav class="app-shell__side-nav">
+			<app-side-nav [sections]="sections"
+						  [sectionVisibility]="sectionVisibility"
+						  (sectionSelected)="onSectionSelected($event)"></app-side-nav>
+		</nav>
+
+		<main class="app-shell__content" #contentColumn>
+			<div class="app-shell__content-inner">
+				<div class="app-shell__status" *ngIf="isLoading">Loading content&hellip;</div>
+
+				<div class="app-shell__status app-shell__status--error" *ngIf="loadError">
+					Could not load content from the server. Error 001.
+				</div>
+
+				<app-content-panel *ngIf="!isLoading && !loadError" [sections]="sections"></app-content-panel>
+			</div>
+		</main>
+	</div>
+</div>

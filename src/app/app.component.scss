@@ -1,0 +1,80 @@
+:host {
+  display: block;
+  height: 100vh;
+}
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--app-bg);
+}
+
+.app-shell__header {
+  flex: 0 0 auto;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  background-color: var(--app-surface);
+  border-bottom: 1px solid var(--app-border);
+}
+
+.app-shell__title {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--app-text-primary);
+}
+
+.app-shell__body {
+  flex: 1 1 auto;
+  display: flex;
+  min-height: 0; // required so children can scroll instead of growing the page
+}
+
+.app-shell__side-nav {
+  flex: 0 0 240px;
+  background-color: var(--app-surface);
+  border-right: 1px solid var(--app-border);
+  overflow-y: auto;
+}
+
+.app-shell__content {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.app-shell__content-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 32px 80px;
+}
+
+.app-shell__status {
+  color: var(--app-text-secondary);
+  padding: 16px 0;
+
+  &--error {
+    color: #ef9a9a;
+  }
+}
+
+@media (max-width: 720px) {
+  .app-shell__body {
+    flex-direction: column;
+  }
+
+  .app-shell__side-nav {
+    flex: 0 0 auto;
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--app-border);
+    max-height: 180px;
+  }
+
+  .app-shell__content-inner {
+    padding: 16px;
+  }
+}

@@ -1,0 +1,55 @@
+:host {
+  display: block;
+}
+
+.content-panel__accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.content-panel__anchor {
+  // Anchor target for scroll-into-view; offset so the sticky-feeling top
+  // of the content column doesn't hide the panel header right after it scrolls.
+  scroll-margin-top: 16px;
+}
+
+.content-panel__panel {
+  background-color: var(--app-surface) !important;
+  border: 1px solid var(--app-border);
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.content-panel__body {
+  color: var(--app-text-primary);
+  line-height: 1.6;
+  padding-top: 4px;
+
+  ::ng-deep p {
+    margin: 0 0 12px;
+  }
+
+  ::ng-deep ul,
+  ::ng-deep ol {
+    margin: 0 0 12px;
+    padding-left: 22px;
+  }
+
+  ::ng-deep code {
+    background-color: var(--app-surface-elevated);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+
+  ::ng-deep a {
+    color: var(--app-accent);
+  }
+}
+
+.content-panel__empty {
+  color: var(--app-text-secondary);
+  padding: 24px;
+  text-align: center;
+}

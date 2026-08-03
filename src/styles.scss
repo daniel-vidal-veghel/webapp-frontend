@@ -1,0 +1,73 @@
+// -----------------------------------------------------------------------
+// Global dark theme for the whole application.
+// Built with Angular Material's M3 theming API (the mat.theme() mixin),
+// which replaced the older mat.define-dark-theme()/all-component-themes()
+// M2 API. This automatically themes every Material component (expansion
+// panels, buttons, etc.) using CSS custom properties - no per-component
+// overrides needed.
+// -----------------------------------------------------------------------
+@use '@angular/material' as mat;
+
+html {
+  // Force dark mode everywhere, regardless of the visitor's OS setting.
+  color-scheme: dark;
+
+  @include mat.theme((
+    color: (
+      theme-type: dark,
+      primary: mat.$cyan-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+// -----------------------------------------------------------------------
+// App-wide dark palette variables (used outside Material components too:
+// side nav, layout shell, scrollbars, etc.)
+// -----------------------------------------------------------------------
+:root {
+  --app-bg: #121212;
+  --app-surface: #1e1e1e;
+  --app-surface-elevated: #262626;
+  --app-border: #333333;
+  --app-text-primary: #e8e8e8;
+  --app-text-secondary: #a0a0a0;
+  --app-accent: #26c6da;
+  --app-accent-contrast: #062024;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--app-bg);
+  color: var(--app-text-primary);
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+// Slim, dark scrollbars everywhere (Webkit + Firefox)
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #4a4a4a var(--app-surface);
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: var(--app-surface);
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #4a4a4a;
+  border-radius: 6px;
+  border: 2px solid var(--app-surface);
+}
+
+a {
+  color: var(--app-accent);
+}
