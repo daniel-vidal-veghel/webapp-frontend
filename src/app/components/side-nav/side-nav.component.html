@@ -4,13 +4,13 @@
 	<ng-container *ngFor="let section of sections;">
 		<!-- The Button -->
 
-		<button *ngIf="section.type != 'Divider'" type="button"
+		<button *ngIf="section.type != 'divider'" type="button"
 				class="side-nav__button"
 				[class.side-nav__button--active]="sectionVisibility[section.id]"
 				(click)="onButtonClick(section.id)">
 			{{ section.title }}
 		</button>
-		<mat-divider *ngIf="section.type == 'Divider'" />
+		<mat-divider *ngIf="section.type == 'divider'" />
 	</ng-container>
 	
 	<p class="side-nav__empty" *ngIf="sections.length === 0">

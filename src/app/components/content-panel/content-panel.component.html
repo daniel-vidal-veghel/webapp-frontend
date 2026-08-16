@@ -1,7 +1,7 @@
 <mat-accordion class="content-panel__accordion" [multi]="true">
 	<div class="content-panel__anchor" *ngFor="let section of sections" [id]="section.id">
 
-		<mat-expansion-panel *ngIf="section.type === 'Expansion'" class="content-panel__panel" [expanded]="true">
+		<mat-expansion-panel *ngIf="section.type === 'expansion'" class="content-panel__panel" [expanded]="true">
 			<mat-expansion-panel-header>
 				<mat-panel-title>{{ section.description || section.title }}</mat-panel-title>
 			</mat-expansion-panel-header>
@@ -9,9 +9,9 @@
 			<div class="content-panel__body" [innerHTML]="asHtml(section)"></div>
 		</mat-expansion-panel>
 
-		<mat-divider *ngIf="section.type === 'Divider'" />
+		<mat-divider *ngIf="section.type === 'divider'" />
 
-		<h1 *ngIf="section.type === 'Header'" [innerHTML]="asHtml(section)"></h1>
+		<h1 *ngIf="section.type === 'header'" [innerHTML]="asHtml(section)"></h1>
 	</div>
 
 	<p class="content-panel__empty" *ngIf="sections.length === 0">No content is currently available.</p>
