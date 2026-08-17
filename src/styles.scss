@@ -103,3 +103,35 @@ a {
     color: var(--app-accent);
   }
 }
+
+.print-view__body {
+  p {
+    margin: 0 0 8pt;
+    // Prevents a paragraph split from leaving just 1-2 stray lines
+    // dangling at the top/bottom of a page.
+    orphans: 3;
+    widows: 3;
+  }
+
+  ul,
+  ol {
+    margin: 0 0 8pt;
+    padding-left: 18pt;
+  }
+
+  li {
+    // Small element - safe to keep intact across a page break.
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  code {
+    background: #eee;
+    padding: 1pt 3pt;
+  }
+}

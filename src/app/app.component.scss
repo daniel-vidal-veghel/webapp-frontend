@@ -61,6 +61,18 @@
   }
 }
 
+@media print {
+  :host {
+    // Avoid reserving a 100vh-tall empty box on the printed page/preview
+    // now that .app-shell (its only on-screen child) is hidden below.
+    height: auto;
+  }
+
+  .app-shell {
+    display: none;
+  }
+}
+
 @media (max-width: 720px) {
   .app-shell__body {
     flex-direction: column;

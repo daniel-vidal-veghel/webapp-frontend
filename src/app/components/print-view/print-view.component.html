@@ -1,0 +1,18 @@
+<div class="print-view">
+	<ng-container *ngFor="let section of inlineSections">
+
+		<div class="print-view__expansion" *ngIf="section.type === 'expansion'">
+			<h2 class="print-view__section-title">{{ section.description || section.title }}</h2>
+			<div class="print-view__body" [innerHTML]="section.html"></div>
+		</div>
+
+		<hr class="print-view__divider" *ngIf="section.type === 'divider'" />
+
+		<h1 class="print-view__header" [innerHTML]="section.html" *ngIf="section.type === 'header'"></h1>
+
+	</ng-container>
+
+	<p class="print-view__empty" *ngIf="inlineSections.length === 0">
+		No content is currently available.
+	</p>
+</div>

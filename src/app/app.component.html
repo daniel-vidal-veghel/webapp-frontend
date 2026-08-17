@@ -7,6 +7,7 @@
 		<nav class="app-shell__side-nav">
 			<app-side-nav [sections]="sections"
 						  [sectionVisibility]="sectionVisibility"
+						  [showDownloadBtn]="!isLoading && !loadError"
 						  (sectionSelected)="onSectionSelected($event)"></app-side-nav>
 		</nav>
 
@@ -23,3 +24,6 @@
 		</main>
 	</div>
 </div>
+
+<!-- Always in the DOM, screen-hidden via print-view.component.scss; shown only under @media print. -->
+<app-print-view [sections]="sections"></app-print-view>

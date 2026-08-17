@@ -16,4 +16,11 @@
 	<p class="side-nav__empty" *ngIf="sections.length === 0">
 		No sections available.
 	</p>
+
+	<button *ngIf="showDownloadBtn" type="button"
+			class="side-nav__download"
+			(click)="onDownloadClick()">
+		Download
+		<mat-icon class="side-nav__download-icon">picture_as_pdf</mat-icon>
+	</button>
 </div>

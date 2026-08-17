@@ -4,10 +4,11 @@ import { ContentSection } from './models/content-section.model';
 import { ContentService } from './services/content.service';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { ContentPanelComponent } from './components/content-panel/content-panel.component';
+import { PrintViewComponent } from './components/print-view/print-view.component';
 
 @Component({
 	selector: 'app-root',
-	imports: [CommonModule, SideNavComponent, ContentPanelComponent],
+	imports: [CommonModule, SideNavComponent, ContentPanelComponent, PrintViewComponent],
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss']
 })

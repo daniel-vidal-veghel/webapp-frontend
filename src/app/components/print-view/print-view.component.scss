@@ -1,0 +1,80 @@
+// Hidden on screen; only shown under @media print (below). Kept always in
+// the DOM (never *ngIf-toggled) so window.print() has something ready to
+// print without any on-demand construction/timing logic.
+:host {
+  display: none;
+}
+
+@media print {
+  :host {
+    display: block;
+  }
+
+  @page {
+    margin: 18mm 16mm;
+  }
+}
+
+// Deliberately independent from the app's dark on-screen theme (no
+// var(--app-*) tokens): plain black-on-white, serif, print-appropriate
+// typography. Edit freely here without touching any on-screen styling.
+.print-view {
+  color: #000;
+  background: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 11pt;
+  line-height: 1.5;
+}
+
+.print-view__header {
+  font-size: 20pt;
+  font-weight: 700;
+  margin: 24pt 0 8pt;
+  page-break-after: avoid;
+  page-break-inside: avoid;
+  break-after: avoid;
+  break-inside: avoid;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.print-view__expansion {
+  // No page-break-inside/break-inside: avoid here on purpose - these
+  // blocks can run well over a page (e.g. long work-history entries).
+  // Forcing "never split" on something that large just pushes the whole
+  // block to a fresh page, leaving most of the previous page blank.
+  // Letting it flow lets the page fill up normally; the title and
+  // paragraph rules in styles.scss handle the actual widow/orphan concerns.
+  margin: 0 0 14pt;
+}
+
+.print-view__section-title {
+  font-size: 13pt;
+  font-weight: 700;
+  margin: 0 0 4pt;
+  // Small element (one line) - safe to pin without risking a big gap.
+  // Keeps the title from being stranded alone at the bottom of a page.
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+// Styling for the [innerHTML]-injected section.html content itself
+// (p/ul/li/a/code) lives in src/styles.scss, not here - that content
+// bypasses Angular's view encapsulation, so component-scoped rules
+// (even via ::ng-deep) can't reach it meaningfully; see the matching
+// .print-view__body block in styles.scss.
+
+.print-view__divider {
+  border: none;
+  border-top: 1pt solid #999;
+  margin: 16pt 0;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.print-view__empty {
+  text-align: center;
+  color: #555;
+}
