@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef, ElementRef, ViewChild 
 import { CommonModule } from '@angular/common';
 import { ContentSection } from './models/content-section.model';
 import { ContentService } from './services/content.service';
-import { SideNavComponent } from './components/side-nav/side-nav.component';
+import { SideNavComponent, SiteLanguage } from './components/side-nav/side-nav.component';
 import { ContentPanelComponent } from './components/content-panel/content-panel.component';
 import { PrintViewComponent } from './components/print-view/print-view.component';
 
@@ -13,10 +13,12 @@ import { PrintViewComponent } from './components/print-view/print-view.component
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
+	setup?: ContentSection;
 	sections: ContentSection[] = [];
 	isLoading = true;
 	loadError = false;
 	sectionVisibility: Record<string, boolean> = {};
+	currentLang: SiteLanguage = 'nl'; // Default is dutch
 
 	@ViewChild('contentColumn') private contentColumnRef?: ElementRef<HTMLElement>;
 
@@ -60,14 +62,15 @@ export class AppComponent implements OnInit, OnDestroy {
 			setTimeout(() => this.setupActiveSectionTracking(), 500);
 		}
 	}
-
+	// The very first section, if you get any, is the setup data. It's never shown in the content panel.
 	private loadSections(): void {
 		this.isLoading = true;
 		this.loadError = false;
 
-		this.contentService.getSections().subscribe({
+		this.contentService.getSections(this.currentLang).subscribe({
 			next: (sections) => {
-				this.sections = sections;
+				this.setup = sections[0];
+				this.sections = sections.slice(1);
 				this.isLoading = false;
 				// Workaround for a known Angular 22 regression (NgModule apps with
 				// standalone: false components lose automatic zone-triggered change
@@ -116,7 +119,7 @@ export class AppComponent implements OnInit, OnDestroy {
 		);
 
 		this.sections.forEach((section) => {
-			if (!section.id) // Dividers are sections but have no id and shouldn't be observed anyway.
+			if (!section.id) // Dividers and setup are sections but have no id and shouldn't be observed anyway.
 				return;
 			
 			const el = document.getElementById(section.id);
@@ -125,5 +128,11 @@ export class AppComponent implements OnInit, OnDestroy {
 				this.intersectionObserver?.observe(el);
 			
 		});
+	}
+
+	// Hacks currentlang to switch the language without too much code.
+	onLanguageSwitchRequested(): void {
+		this.currentLang = this.currentLang === 'nl' ? 'en' : 'nl';
+		this.loadSections();
 	}
 }

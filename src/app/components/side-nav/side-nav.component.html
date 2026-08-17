@@ -17,7 +17,36 @@
 		No sections available.
 	</p>
 
-	<button *ngIf="showDownloadBtn" type="button"
+	<!-- Shows the language you'd SWITCH TO, not the current one - e.g. while
+	     content is in Dutch, this offers "English" + the UK flag. -->
+	<button *ngIf="showCtrlBtns" type="button"
+			class="side-nav__lang-switch"
+			(click)="onLanguageSwitchClick()">
+		<ng-container *ngIf="currentLang === 'nl'; else dutchOption">
+			English
+			<svg class="side-nav__lang-flag" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+				<rect width="60" height="30" fill="#012169" />
+				<path d="M0,0 L60,30 M60,0 L0,30" stroke="#FFFFFF" stroke-width="6" />
+				<path d="M0,1.5 L25.5,15 L34.5,15 L60,1.5" stroke="#C8102E" stroke-width="4" fill="none" />
+				<path d="M0,28.5 L25.5,15 L34.5,15 L60,28.5" stroke="#C8102E" stroke-width="4" fill="none" />
+				<rect x="24" y="0" width="12" height="30" fill="#FFFFFF" />
+				<rect x="0" y="10" width="60" height="10" fill="#FFFFFF" />
+				<rect x="26" y="0" width="8" height="30" fill="#C8102E" />
+				<rect x="0" y="12" width="60" height="6" fill="#C8102E" />
+			</svg>
+		</ng-container>
+		<ng-template #dutchOption>
+			Nederlands
+			<svg class="side-nav__lang-flag" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+				<rect width="60" height="10" y="0" fill="#AE1C28" />
+				<rect width="60" height="10" y="10" fill="#FFFFFF" />
+				<rect width="60" height="10" y="20" fill="#21468B" />
+			</svg>
+		</ng-template>
+	</button>
+
+
+	<button *ngIf="showCtrlBtns" type="button"
 			class="side-nav__download"
 			(click)="onDownloadClick()">
 		Download

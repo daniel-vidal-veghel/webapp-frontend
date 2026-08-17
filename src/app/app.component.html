@@ -1,14 +1,16 @@
 <div class="app-shell">
 	<header class="app-shell__header">
-		<span class="app-shell__title">WebApp</span>
+		<span class="app-shell__title">We+++</span>
 	</header>
 
 	<div class="app-shell__body">
 		<nav class="app-shell__side-nav">
 			<app-side-nav [sections]="sections"
 						  [sectionVisibility]="sectionVisibility"
-						  [showDownloadBtn]="!isLoading && !loadError"
-						  (sectionSelected)="onSectionSelected($event)"></app-side-nav>
+						  [showCtrlBtns]="!isLoading && !loadError"
+						  [currentLang]="currentLang"
+						  (sectionSelected)="onSectionSelected($event)"
+						  (languageSwitchRequested)="onLanguageSwitchRequested()"></app-side-nav>
 		</nav>
 
 		<main class="app-shell__content" #contentColumn>
