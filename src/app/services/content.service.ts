@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Service, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -13,7 +13,8 @@ export class ContentService {
 	private readonly baseUrl = `${environment.apiBaseUrl}/content`;
 	private readonly http = inject(HttpClient);
 	
-	getSections(): Observable<ContentSection[]> {
-		return this.http.get<ContentSection[]>(this.baseUrl);
+	getSections(lang?: string): Observable<ContentSection[]> {
+		const headers = lang ? new HttpHeaders({ 'X-Lang': lang }) : undefined;
+		return this.http.get<ContentSection[]>(this.baseUrl, { headers });
 	}
 }
