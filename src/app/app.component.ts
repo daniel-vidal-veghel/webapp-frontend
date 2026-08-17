@@ -69,8 +69,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
 		this.contentService.getSections(this.currentLang).subscribe({
 			next: (sections) => {
-				this.setup = sections[0];
-				this.sections = sections.slice(1);
+				const remaining = [...sections];
+				this.setup = remaining[0]?.type == 'setup' ? remaining.splice(0, 1)[0] : undefined;
+				this.sections = remaining
 				this.isLoading = false;
 				// Workaround for a known Angular 22 regression (NgModule apps with
 				// standalone: false components lose automatic zone-triggered change
