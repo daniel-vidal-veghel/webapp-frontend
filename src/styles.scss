@@ -71,3 +71,35 @@ html, body {
 a {
   color: var(--app-accent);
 }
+
+// -----------------------------------------------------------------------
+// Styling for [innerHTML]-injected section.html content (rich text from
+// site-content.xml: paragraphs, lists, links, etc.). This content bypasses
+// Angular's view encapsulation entirely, so it can only be styled globally
+// here - component-scoped rules, even via the deprecated ::ng-deep, can't
+// meaningfully reach it. See ContentPanelComponent.asHtml() /
+// PrintViewComponent.asHtml() for where it's rendered.
+// -----------------------------------------------------------------------
+
+.content-panel__body {
+  p {
+    margin: 0 0 12px;
+  }
+
+  ul,
+  ol {
+    margin: 0 0 12px;
+    padding-left: 22px;
+  }
+
+  code {
+    background-color: var(--app-surface-elevated);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+
+  a {
+    color: var(--app-accent);
+  }
+}

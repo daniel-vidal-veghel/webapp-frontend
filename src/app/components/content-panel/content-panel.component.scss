@@ -25,27 +25,11 @@
   color: var(--app-text-primary);
   line-height: 1.6;
   padding-top: 4px;
-
-  ::ng-deep p {
-    margin: 0 0 12px;
-  }
-
-  ::ng-deep ul,
-  ::ng-deep ol {
-    margin: 0 0 12px;
-    padding-left: 22px;
-  }
-
-  ::ng-deep code {
-    background-color: var(--app-surface-elevated);
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 0.9em;
-  }
-
-  ::ng-deep a {
-    color: var(--app-accent);
-  }
+    // Styling for the [innerHTML]-injected section.html content itself
+    // (p/ul/ol/code/a) lives in src/styles.scss, not here - that content
+    // bypasses Angular's view encapsulation, so component-scoped rules
+    // (even via ::ng-deep) can't reach it meaningfully; see the matching
+    // .content-panel__body block in styles.scss.
 }
 
 .content-panel__empty {
