@@ -6,12 +6,12 @@
 				<mat-panel-title>{{ section.description || section.title }}</mat-panel-title>
 			</mat-expansion-panel-header>
 
-			<div class="content-panel__body" [innerHTML]="asHtml(section)"></div>
+			<div class="content-panel__body" [innerHTML]="section.html"></div>
 		</mat-expansion-panel>
 
 		<mat-divider *ngIf="section.type === 'divider'" />
 
-		<h1 *ngIf="section.type === 'header'" [innerHTML]="asHtml(section)"></h1>
+		<h1 *ngIf="section.type === 'header'" [innerHTML]="section.html"></h1>
 	</div>
 
 	<p class="content-panel__empty" *ngIf="sections.length === 0">No content is currently available.</p>
