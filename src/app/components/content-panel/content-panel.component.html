@@ -1,4 +1,12 @@
 <mat-accordion class="content-panel__accordion" [multi]="true">
+
+	<mat-expansion-panel *ngIf="setup" class="content-panel__panel" [expanded]="true">
+		<mat-expansion-panel-header>
+			<mat-panel-title>{{ setup.description || setup.title }}</mat-panel-title>
+		</mat-expansion-panel-header>
+		<div class="content-panel__body" [innerHTML]="setup.html"></div>
+	</mat-expansion-panel>
+
 	<div class="content-panel__anchor" *ngFor="let section of sections" [id]="section.id">
 
 		<mat-expansion-panel *ngIf="section.type === 'expansion'" class="content-panel__panel" [expanded]="true">

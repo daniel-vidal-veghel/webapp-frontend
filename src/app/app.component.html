@@ -21,7 +21,7 @@
 					Could not load content from the server. Error 001.
 				</div>
 
-				<app-content-panel *ngIf="!isLoading && !loadError" [sections]="sections"></app-content-panel>
+				<app-content-panel *ngIf="!isLoading && !loadError" [sections]="sections" [setup]="setup"></app-content-panel>
 			</div>
 		</main>
 	</div>

@@ -12,4 +12,5 @@ import { ContentSection } from '../../models/content-section.model';
 })
 export class ContentPanelComponent {
 	@Input() sections: ContentSection[] = [];
+	@Input() setup?: ContentSection;
 }
