@@ -9,17 +9,10 @@
 @use '@angular/material' as mat;
 
 html {
-  // Force dark mode everywhere, regardless of the visitor's OS setting.
-  color-scheme: dark;
+    // Force dark mode everywhere, regardless of the visitor's OS setting.
+    color-scheme: dark;
 
-  @include mat.theme((
-    color: (
-      theme-type: dark,
-      primary: mat.$cyan-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
+    @include mat.theme(( color: ( theme-type: dark, primary: mat.$cyan-palette, ), typography: Roboto, density: 0, ));
 }
 
 // -----------------------------------------------------------------------
@@ -27,49 +20,52 @@ html {
 // side nav, layout shell, scrollbars, etc.)
 // -----------------------------------------------------------------------
 :root {
-  --app-bg: #121212;
-  --app-surface: #1e1e1e;
-  --app-surface-elevated: #262626;
-  --app-border: #333333;
-  --app-text-primary: #e8e8e8;
-  --app-text-secondary: #a0a0a0;
-  --app-accent: #26c6da;
-  --app-accent-contrast: #062024;
+    --app-bg: #121212;
+    --app-surface: #1e1e1e;
+    --app-surface-elevated: #262626;
+    --app-border: #333333;
+    --app-text-primary: #e8e8e8;
+    --app-text-secondary: #a0a0a0;
+    --app-accent: #26c6da;
+    --app-accent-contrast: #062024;
 }
 
 html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background-color: var(--app-bg);
-  color: var(--app-text-primary);
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--app-bg);
+    color: var(--app-text-primary);
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 // Slim, dark scrollbars everywhere (Webkit + Firefox)
 * {
-  scrollbar-width: thin;
-  scrollbar-color: #4a4a4a var(--app-surface);
+    scrollbar-width: thin;
+    scrollbar-color: #4a4a4a var(--app-surface);
 }
+
 *::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+    width: 10px;
+    height: 10px;
 }
+
 *::-webkit-scrollbar-track {
-  background: var(--app-surface);
+    background: var(--app-surface);
 }
+
 *::-webkit-scrollbar-thumb {
-  background-color: #4a4a4a;
-  border-radius: 6px;
-  border: 2px solid var(--app-surface);
+    background-color: #4a4a4a;
+    border-radius: 6px;
+    border: 2px solid var(--app-surface);
 }
 
 a {
-  color: var(--app-accent);
+    color: var(--app-accent);
 }
 
 // -----------------------------------------------------------------------
@@ -77,61 +73,78 @@ a {
 // site-content.xml: paragraphs, lists, links, etc.). This content bypasses
 // Angular's view encapsulation entirely, so it can only be styled globally
 // here - component-scoped rules, even via the deprecated ::ng-deep, can't
-// meaningfully reach it. See ContentPanelComponent.asHtml() /
-// PrintViewComponent.asHtml() for where it's rendered.
+// meaningfully reach it. Rendered by the [innerHTML] bindings in
+// content-panel.component.html and print-view.component.html.
 // -----------------------------------------------------------------------
 
+// Wrap images in <div class="image-grid"> in the XML to show them two per row.
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin: 0 0 12px;
+}
+
 .content-panel__body {
-  p {
-    margin: 0 0 12px;
-  }
+    p {
+        margin: 0 0 12px;
+    }
 
-  ul,
-  ol {
-    margin: 0 0 12px;
-    padding-left: 22px;
-  }
+    ul,
+    ol {
+        margin: 0 0 12px;
+        padding-left: 22px;
+    }
 
-  code {
-    background-color: var(--app-surface-elevated);
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 0.9em;
-  }
+    code {
+        background-color: var(--app-surface-elevated);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.9em;
+    }
 
-  a {
-    color: var(--app-accent);
-  }
+    a {
+        color: var(--app-accent);
+    }
+    // Click opens the image dialog in ContentPanelComponent.
+    img {
+        max-width: 100%;
+        cursor: zoom-in;
+    }
 }
 
 .print-view__body {
-  p {
-    margin: 0 0 8pt;
-    // Prevents a paragraph split from leaving just 1-2 stray lines
-    // dangling at the top/bottom of a page.
-    orphans: 3;
-    widows: 3;
-  }
+    p {
+        margin: 0 0 8pt;
+        // Prevents a paragraph split from leaving just 1-2 stray lines
+        // dangling at the top/bottom of a page.
+        orphans: 3;
+        widows: 3;
+    }
 
-  ul,
-  ol {
-    margin: 0 0 8pt;
-    padding-left: 18pt;
-  }
+    ul,
+    ol {
+        margin: 0 0 8pt;
+        padding-left: 18pt;
+    }
 
-  li {
-    // Small element - safe to keep intact across a page break.
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
+    li {
+        // Small element - safe to keep intact across a page break.
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
 
-  a {
-    color: #000;
-    text-decoration: underline;
-  }
+    a {
+        color: #000;
+        text-decoration: underline;
+    }
 
-  code {
-    background: #eee;
-    padding: 1pt 3pt;
-  }
+    code {
+        background: #eee;
+        padding: 1pt 3pt;
+    }
+
+    img {
+        max-width: 100%;
+    }
 }

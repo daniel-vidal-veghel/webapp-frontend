@@ -1,4 +1,4 @@
-<mat-accordion class="content-panel__accordion" [multi]="true">
+<mat-accordion class="content-panel__accordion" [multi]="true" (click)="openImage($event)">
 
 	<mat-expansion-panel *ngIf="setup" class="content-panel__panel" [expanded]="true">
 		<mat-expansion-panel-header>
@@ -24,3 +24,13 @@
 
 	<p class="content-panel__empty" *ngIf="sections.length === 0">No content is currently available.</p>
 </mat-accordion>
+
+<!-- Native modal: showModal() provides the backdrop, Esc-to-close and focus trapping. A click on the backdrop targets the dialog itself. -->
+<dialog #imageDialog class="image-dialog"
+		(click)="$event.target === imageDialog && imageDialog.close()"
+		(keydown.arrowleft)="stepImage(-1)"
+		(keydown.arrowright)="stepImage(1)">
+	<button class="image-dialog__nav" *ngIf="images.length > 1" (click)="stepImage(-1)" aria-label="Previous image">&#8249;</button>
+	<img class="image-dialog__img" *ngIf="images.length" [src]="images[imageIndex].src" [alt]="images[imageIndex].alt">
+	<button class="image-dialog__nav" *ngIf="images.length > 1" (click)="stepImage(1)" aria-label="Next image">&#8250;</button>
+</dialog>

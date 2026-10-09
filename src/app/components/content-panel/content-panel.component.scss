@@ -37,3 +37,48 @@
   padding: 24px;
   text-align: center;
 }
+
+// Transparent box, so only the image and the arrows show over the backdrop.
+.image-dialog {
+  max-width: 95vw;
+  max-height: 95vh;
+  padding: 0;
+  border: none;
+  background: transparent;
+  overflow: visible;
+
+  // Only when open: a display rule on the closed dialog would override the browser's display: none.
+  &[open] {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.85);
+  }
+}
+
+.image-dialog__img {
+  max-width: 85vw;
+  max-height: 90vh;
+  border-radius: 8px;
+}
+
+.image-dialog__nav {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--app-border);
+  border-radius: 50%;
+  background: var(--app-surface-elevated);
+  color: var(--app-text-primary);
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--app-accent);
+    border-color: var(--app-accent);
+  }
+}
