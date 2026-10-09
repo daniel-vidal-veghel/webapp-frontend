@@ -4,7 +4,7 @@
 	</header>
 
 	<div class="app-shell__body">
-		<nav class="app-shell__side-nav">
+		<nav class="app-shell__side-nav" #sideNavColumn>
 			<app-side-nav [sections]="sections"
 						  [sectionVisibility]="sectionVisibility"
 						  [showCtrlBtns]="!isLoading && !loadError"

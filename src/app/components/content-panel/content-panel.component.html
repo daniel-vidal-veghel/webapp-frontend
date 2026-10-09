@@ -30,7 +30,7 @@
 		(click)="$event.target === imageDialog && imageDialog.close()"
 		(keydown.arrowleft)="stepImage(-1)"
 		(keydown.arrowright)="stepImage(1)">
-	<button class="image-dialog__nav" *ngIf="images.length > 1" (click)="stepImage(-1)" aria-label="Previous image">&#8249;</button>
+	<button class="image-dialog__nav image-dialog__nav--prev" *ngIf="images.length > 1" (click)="stepImage(-1)" aria-label="Previous image">&#8249;</button>
 	<img class="image-dialog__img" *ngIf="images.length" [src]="images[imageIndex].src" [alt]="images[imageIndex].alt">
-	<button class="image-dialog__nav" *ngIf="images.length > 1" (click)="stepImage(1)" aria-label="Next image">&#8250;</button>
+	<button class="image-dialog__nav image-dialog__nav--next" *ngIf="images.length > 1" (click)="stepImage(1)" aria-label="Next image">&#8250;</button>
 </dialog>

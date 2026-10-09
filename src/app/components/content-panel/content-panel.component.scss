@@ -49,7 +49,8 @@
 
   // Only when open: a display rule on the closed dialog would override the browser's display: none.
   &[open] {
-    display: flex;
+    display: grid;
+    grid-template-areas: "prev image next";
     align-items: center;
     gap: 12px;
   }
@@ -60,13 +61,22 @@
 }
 
 .image-dialog__img {
+  grid-area: image;
+  justify-self: center;
   max-width: 85vw;
   max-height: 90vh;
   border-radius: 8px;
 }
 
+.image-dialog__nav--prev {
+  grid-area: prev;
+}
+
+.image-dialog__nav--next {
+  grid-area: next;
+}
+
 .image-dialog__nav {
-  flex: none;
   width: 48px;
   height: 48px;
   border: 1px solid var(--app-border);
@@ -80,5 +90,28 @@
   &:hover {
     color: var(--app-accent);
     border-color: var(--app-accent);
+  }
+}
+
+// Same breakpoint as the app shell's mobile layout. Side arrows don't fit next to the image on a phone,
+// so they move underneath it and the image gets the full width.
+@media (max-width: 720px) {
+  .image-dialog[open] {
+    grid-template-areas:
+      "image image"
+      "prev next";
+  }
+
+  .image-dialog__img {
+    max-width: 95vw;
+    max-height: 80vh;
+  }
+
+  .image-dialog__nav--prev {
+    justify-self: end;
+  }
+
+  .image-dialog__nav--next {
+    justify-self: start;
   }
 }

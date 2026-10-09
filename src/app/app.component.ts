@@ -21,6 +21,7 @@ export class AppComponent implements OnInit, OnDestroy {
 	currentLang: SiteLanguage = 'nl'; // Default is dutch
 
 	@ViewChild('contentColumn') private contentColumnRef?: ElementRef<HTMLElement>;
+	@ViewChild('sideNavColumn') private sideNavColumnRef?: ElementRef<HTMLElement>;
 
 	private intersectionObserver?: IntersectionObserver;
 
@@ -112,6 +113,7 @@ export class AppComponent implements OnInit, OnDestroy {
 				}
 				this.sectionVisibility = updated;
 				this.cdr.detectChanges();
+				this.scrollNavToActiveSection();
 			},
 			{
 				root,
@@ -129,6 +131,22 @@ export class AppComponent implements OnInit, OnDestroy {
 				this.intersectionObserver?.observe(el);
 			
 		});
+	}
+
+	// Keeps the topmost highlighted nav button in view while the content column scrolls.
+	// Scrolls the nav column itself rather than using scrollIntoView, which could also move the page.
+	private scrollNavToActiveSection(): void {
+		const nav = this.sideNavColumnRef?.nativeElement;
+		const button = nav?.querySelector<HTMLElement>('.side-nav__button--active');
+		if (!nav || !button)
+			return;
+
+		const navBox = nav.getBoundingClientRect();
+		const buttonBox = button.getBoundingClientRect();
+		if (buttonBox.top < navBox.top)
+			nav.scrollBy({ top: buttonBox.top - navBox.top, behavior: 'smooth' });
+		else if (buttonBox.bottom > navBox.bottom)
+			nav.scrollBy({ top: buttonBox.bottom - navBox.bottom, behavior: 'smooth' });
 	}
 
 	// Hacks currentlang to switch the language without too much code.
