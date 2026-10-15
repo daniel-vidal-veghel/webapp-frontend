@@ -87,64 +87,67 @@ a {
 
 .content-panel__body {
     p {
-        margin: 0 0 12px;
+	margin: 0 0 12px;
     }
 
     ul,
     ol {
-        margin: 0 0 12px;
-        padding-left: 22px;
+	margin: 0 0 12px;
+	padding-left: 22px;
     }
 
     code {
-        background-color: var(--app-surface-elevated);
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-size: 0.9em;
+	background-color: var(--app-surface-elevated);
+	padding: 2px 6px;
+	border-radius: 4px;
+	font-size: 0.9em;
     }
 
     a {
-        color: var(--app-accent);
+	color: var(--app-accent);
     }
+
     // Click opens the image dialog in ContentPanelComponent.
     img {
-        max-width: 100%;
-        cursor: zoom-in;
+	max-width: 100%;
+	cursor: zoom-in;
     }
 }
 
 .print-view__body {
     p {
-        margin: 0 0 8pt;
-        // Prevents a paragraph split from leaving just 1-2 stray lines
-        // dangling at the top/bottom of a page.
-        orphans: 3;
-        widows: 3;
+	margin: 0 0 8pt;
+	// Prevents a paragraph split from leaving just 1-2 stray lines
+	// dangling at the top/bottom of a page.
+	orphans: 3;
+	widows: 3;
     }
 
     ul,
     ol {
-        margin: 0 0 8pt;
-        padding-left: 18pt;
+	margin: 0 0 8pt;
+	padding-left: 18pt;
     }
 
     li {
-        // Small element - safe to keep intact across a page break.
-        page-break-inside: avoid;
-        break-inside: avoid;
+	// Small element - safe to keep intact across a page break.
+	page-break-inside: avoid;
+	break-inside: avoid;
     }
 
     a {
-        color: #000;
-        text-decoration: underline;
+	color: #000;
+	text-decoration: underline;
     }
 
     code {
-        background: #eee;
-        padding: 1pt 3pt;
+	background: #eee;
+	padding: 1pt 3pt;
     }
 
+    // Top-aligned so the link PrintViewComponent wraps it in adds no baseline gap below the picture.
     img {
-        max-width: 100%;
+	max-width: 100%;
+	vertical-align: top;
     }
 }
