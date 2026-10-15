@@ -117,7 +117,7 @@ export class AppComponent implements OnInit, OnDestroy {
 			},
 			{
 				root,
-				threshold: [0.25, 0.5, 0.75]
+				threshold: 0
 			}
 		);
 
@@ -133,20 +133,21 @@ export class AppComponent implements OnInit, OnDestroy {
 		});
 	}
 
-	// Keeps the topmost highlighted nav button in view while the content column scrolls.
-	// Scrolls the nav column itself rather than using scrollIntoView, which could also move the page.
+	// Keeps the highlighted nav buttons in view while the content column scrolls. A section that just got highlighted shows up straight away.
+	// If they don't all fit, the topmost one wins. Scrolls the nav column itself rather than using scrollIntoView, which could also move the page.
 	private scrollNavToActiveSection(): void {
 		const nav = this.sideNavColumnRef?.nativeElement;
-		const button = nav?.querySelector<HTMLElement>('.side-nav__button--active');
-		if (!nav || !button)
+		const active = nav?.querySelectorAll<HTMLElement>('.side-nav__button--active');
+		if (!nav || !active?.length)
 			return;
 
 		const navBox = nav.getBoundingClientRect();
-		const buttonBox = button.getBoundingClientRect();
-		if (buttonBox.top < navBox.top)
-			nav.scrollBy({ top: buttonBox.top - navBox.top, behavior: 'smooth' });
-		else if (buttonBox.bottom > navBox.bottom)
-			nav.scrollBy({ top: buttonBox.bottom - navBox.bottom, behavior: 'smooth' });
+		const top = active[0].getBoundingClientRect().top;
+		const bottom = active[active.length - 1].getBoundingClientRect().bottom;
+		if (bottom > navBox.bottom)
+			nav.scrollBy({ top: Math.min(bottom - navBox.bottom, top - navBox.top), behavior: 'smooth' });
+		else if (top < navBox.top)
+			nav.scrollBy({ top: top - navBox.top, behavior: 'smooth' });
 	}
 
 	// Hacks currentlang to switch the language without too much code.
