@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ContentSection } from '../../models/content-section.model';
 
 // A grid column in print is about 9 cm wide, so 1000 px prints at roughly 300 ppi.
-const maxPrintImageWidth = 1000;
+const maxPrintImageWidth = 800;
 
 /**
  * Print rendering of the content -  independent from ContentPanelComponent's;
@@ -72,6 +72,6 @@ export class PrintViewComponent implements OnInit {
 		context.imageSmoothingQuality = 'high';
 		context.drawImage(image, 0, 0, canvas.width, canvas.height);
 		// Fires load again; by then the image is linked and small enough, so both steps skip it.
-		image.src = canvas.toDataURL('image/png');
+		image.src = canvas.toDataURL('image/jpg', 0.85);
 	}
 }
